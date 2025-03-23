@@ -1,23 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy 2nd Anniversary</title>
+    <title>Happy Anniversary</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #ffe6e6;
-            color: #ff3366;
-            padding: 50px;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        h1 {
-            font-size: 50px;
-            margin-bottom: 20px;
+
+        h1,h2 {
+            font-size: 2.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
-        p {
-            font-size: 20px;
+        
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff6699;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff3366;
+        }
+
+        .countdown {
+            font-size: 2rem;
+            color: white;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .bubble {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 192, 203, 0.7);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatUp 3s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
         }
         .heart {
             font-size: 100px;
@@ -31,8 +80,61 @@
     </style>
 </head>
 <body>
+
     <h1>💖 Happy 2nd Anniversary 💖</h1>
-    <p>พี่รักเบบี๋นะ😊</p>
+    <button onclick="startCountdown()">กดเลยครับคนสวย</button>
+    <p id="countdown" class="countdown"></p>
+    <h1 id="message">Happy Anniversary for 2 years na kab 🎉</h1>
+    <h2 id="message2">"I'm now in my second year. We've had a lot of arguments this year, 
+        but a lot has happened too. I want to thank you, babe, for coming into my life. You are like the brightness in my life, 
+        especially on days when you're tired or feeling down. If I've been too busy with my own life or have caused you any hurt, 
+        I apologize for that. I just want you to know that I'll always be here to always support you. As for the mistakes I've made, 
+        I hope you can forgive me. I want you to be that one woman, the mother of our children, and grow old together. 
+        I love you, babe."</h2> <!-- เพิ่มข้อความบรรทัดที่ 2 -->
     <div class="heart">❤️</div>
+
+    
+    <script>
+        function startCountdown() {
+            let countdownEl = document.getElementById("countdown");
+            let messageEl = document.getElementById("message");
+            let message2El = document.getElementById("message2"); // เพิ่มตัวแปรสำหรับข้อความที่ 2
+            
+            let count = 3;
+
+            countdownEl.innerText = count;
+            let timer = setInterval(() => {
+                count--;
+                countdownEl.innerText = count;
+                if (count === 0) {
+                    clearInterval(timer);
+                    countdownEl.style.opacity = "0";
+                    messageEl.style.opacity = "1";
+                    message2El.style.opacity = "1"; // แสดงข้อความบรรทัดที่ 2
+                    startBubbles();
+                }
+            }, 1000);
+        }
+
+        function startBubbles() {
+            for (let i = 0; i < 30; i++) {
+                let bubble = document.createElement("div");
+                bubble.className = "bubble";
+                document.body.appendChild(bubble);
+
+                let size = Math.random() * 20 + 10;
+                bubble.style.width = size + "px";
+                bubble.style.height = size + "px";
+                bubble.style.left = Math.random() * 100 + "vw";
+                bubble.style.animationDuration = (Math.random() * 2 + 2) + "s";
+                bubble.style.background = `rgba(${Math.random() * 255}, 150, 200, 0.7)`;
+
+                setTimeout(() => {
+                    bubble.remove();
+                }, 3000);
+            }
+        }
+    </script>
+
 </body>
 </html>
