@@ -9,6 +9,13 @@
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #adf6f4;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #a0e6ff, #64b3f4);
+            height: 100vh;
+            margin: 0;
+            background-size: 400% 400%;
+            animation: bg-animation 5s infinite alternate;
         }
         .card {
             width: 300px;
@@ -38,6 +45,10 @@
             max-height: 200px;
             margin-top: 10px;
             border-radius: 5px;
+        }
+        @keyframes bg-animation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
     </style>
 </head>
